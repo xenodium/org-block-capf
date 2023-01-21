@@ -56,6 +56,7 @@ Otherwise, insert block at cursor position."
 
 (defvar org-block-capf--regexp "\\(<\\)\\([^ ]*\\)")
 
+;;;###autoload
 (defun org-block-capf ()
   "Function used for `completion-at-point-functions'."
   (when-let* ((activated (looking-back (org-block-capf--regexp)
