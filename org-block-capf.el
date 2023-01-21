@@ -73,6 +73,8 @@ Otherwise, insert block at cursor position."
      :exclusive 'no
      :annotation-function
      (lambda (_) " <org-block>")
+     :company-doc-buffer
+     #'org-block-capf--doc-buffer
      :exit-function
      (lambda (insertion _status)
        (when (seq-contains-p (org-block-capf--all-candidates) insertion)
@@ -125,6 +127,20 @@ Otherwise, insert block at cursor position."
   "Check if there is a TEMPLATE available for completion."
   (seq-contains (map-values org-structure-template-alist)
                 template))
+
+
+;; adapted from company-org-block--company-buffer by Jen-Chieh
+(defun org-block-capf--doc-buffer (candidate)
+  "Return documentation buffer for CANDIDATE."
+  (let ((candidate (if (string-equal "src" candidate)
+                       ""
+                     candidate))
+        (org-block-capf-edit-style 'inline))
+    (with-current-buffer (get-buffer-create " *org-block-capf doc*")
+      (erase-buffer)
+      (insert "<" candidate)
+      (org-block-capf--expand candidate nil)
+      (current-buffer))))
 
 (defun org-block-capf--expand (insertion query-lang)
   "Replace INSERTION with generated source block."
