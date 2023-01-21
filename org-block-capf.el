@@ -88,11 +88,13 @@ Otherwise, insert block at cursor position."
       (add-hook 'completion-at-point-functions capf nil 'local))))
 
 (defun org-block-capf--regexp ()
+  "Compose regexp to detect completion prefix."
   (if org-block-capf-complete-at-bol
       (concat "^[[:space:]]*" org-block-capf--regexp)
     org-block-capf--regexp))
 
 (defun org-block-capf--all-candidates ()
+  "Return all possible org block candidates."
   (seq-sort
    #'string-lessp
    (seq-uniq
@@ -129,7 +131,6 @@ Otherwise, insert block at cursor position."
   (seq-contains-p (map-values org-structure-template-alist)
                   template))
 
-
 ;; adapted from company-org-block--company-buffer by Jen-Chieh
 (defun org-block-capf--doc-buffer (candidate)
   "Return documentation buffer for CANDIDATE."
@@ -143,14 +144,15 @@ Otherwise, insert block at cursor position."
       (org-block-capf--expand candidate nil)
       (current-buffer))))
 
-(defun org-block-capf--expand (insertion query-lang)
-  "Replace INSERTION with generated source block."
+(defun org-block-capf--expand (insertion query-enabled)
+  "Replace INSERTION with generated source block.
+Set QUERY-ENABLED to ask for custom language."
   (delete-region (point) (- (point) (1+ ;; Include "<" in length.
                                      (length insertion))))
   ;; If < trigger generated a matching >, delete it.
   (when (looking-at ">")
     (delete-char 1))
-  (cond ((and query-lang (string-equal insertion "src"))
+  (cond ((and query-enabled (string-equal insertion "src"))
          ;; src templates have no associated language. Ask user for one.
          (org-block-capf--wrap-point (format "src %s%s"
                                                 (read-string "Language: ")
