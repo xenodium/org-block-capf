@@ -125,8 +125,8 @@ Otherwise, insert block at cursor position."
 
 (defun org-block-capf--template-p (template)
   "Check if there is a TEMPLATE available for completion."
-  (seq-contains (map-values org-structure-template-alist)
-                template))
+  (seq-contains-p (map-values org-structure-template-alist)
+                  template))
 
 
 ;; adapted from company-org-block--company-buffer by Jen-Chieh
