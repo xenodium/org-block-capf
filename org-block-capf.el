@@ -71,6 +71,8 @@ Otherwise, insert block at cursor position."
       (lambda (_)
         (org-block-capf--all-candidates)))
      :exclusive 'no
+     :annotation-function
+     (lambda (_) " <org-block>")
      :exit-function
      (lambda (insertion _status)
        (when (seq-contains-p (org-block-capf--all-candidates) insertion)
