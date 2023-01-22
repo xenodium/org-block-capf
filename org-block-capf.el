@@ -81,6 +81,7 @@ Otherwise, insert block at cursor position."
        (when (seq-contains-p (org-block-capf--all-candidates) insertion)
          (org-block-capf--expand insertion t))))))
 
+;;;###autoload
 (defun org-block-capf-add-to-completion-at-point-functions ()
   "Add `org-block-capf' to `completion-at-point-functions'."
   (let ((capf #'org-block-capf))

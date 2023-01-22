@@ -2,17 +2,18 @@
 
 tl;dr “<” to trigger org block completion at point.
 
-[[file:corfu.png]]
+#+attr_html: :align center
+[[file:corfu.png]]\\
+Screenshot of =org-block-capf= completion in =corfu= with =corfu-popupinfo-mode= enabled for block preview.
 
-Like [[https://github.com/xenodium/company-org-block][company-org-block]], but for =completion-at-point= users who'd like similar funcitonality without the [[https://company-mode.github.io/][company]] dependency.
+Like [[https://github.com/xenodium/company-org-block][company-org-block]], but for users of the built-in =completion-at-point= completion or its extensions like [[https://github.com/minad/corfu][corfu]], who want similar functionality without the [[https://company-mode.github.io/][company]] dependency. It's remains compatible with company via its =company-capf= backend.
 
 Check out [[https://github.com/xenodium/company-org-block][company-org-block]] to get a feel for the functionality and capabilities.
 
-You can enable =org-block-capf= by adding it to =completion-at-point-functions= or you can invoke =org-block-capf-add-to-completion-at-point-functions=
-as follows:
+To enable =org-block-capf=, add it to =completion-at-point-functions= (locally) in org-mode, which you can do via:
 
 #+begin_src emacs-lisp :lexical no
   (require 'org-block-capf)
 
-  (org-block-capf-add-to-completion-at-point-functions)
+  (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)
 #+end_src
