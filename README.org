@@ -1,5 +1,7 @@
 tl;dr “<” to trigger org block completion at point.
 
+[[file:corfu.png]]
+
 Like [[https://github.com/xenodium/company-org-block][company-org-block]], but for =completion-at-point= users who'd like similar funcitonality without the [[https://company-mode.github.io/][company]] dependency.
 
 Check out [[https://github.com/xenodium/company-org-block][company-org-block]] to get a feel for the functionality and capabilities.
