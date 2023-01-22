@@ -8,11 +8,10 @@ Like [[https://github.com/xenodium/company-org-block][company-org-block]], but f
 
 Check out [[https://github.com/xenodium/company-org-block][company-org-block]] to get a feel for the functionality and capabilities.
 
-You can enable =org-block-capf= by adding it to =completion-at-point-functions= or you can invoke =org-block-capf-add-to-completion-at-point-functions=
-as follows:
+To enable =org-block-capf=, add it to =completion-at-point-functions= (locally) in org-mode, which you can do via:
 
 #+begin_src emacs-lisp :lexical no
   (require 'org-block-capf)
 
-  (org-block-capf-add-to-completion-at-point-functions)
+  (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)
 #+end_src
