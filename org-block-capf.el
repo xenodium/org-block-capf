@@ -63,7 +63,9 @@ If INTERACTIVE is nil the function acts like a Capf that can be
 be added to `completion-at-point-functions'"
   (interactive (list t))
   (if interactive
-      (let ((completion-at-point-functions (list #'org-block-capf)))
+      (let ((completion-at-point-functions (list #'org-block-capf))
+            ;; Don't require < when interactive.
+            (org-block-capf--regexp "\\(\\)\\([^ ]*\\)"))
         (or (completion-at-point) (user-error "%s: No completions" #'org-block-capf)))
     (when-let* ((activated (looking-back (org-block-capf--regexp)
                                          (line-beginning-position)))
