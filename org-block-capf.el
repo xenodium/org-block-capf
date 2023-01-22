@@ -57,29 +57,35 @@ Otherwise, insert block at cursor position."
 (defvar org-block-capf--regexp "\\(<\\)\\([^ ]*\\)")
 
 ;;;###autoload
-(defun org-block-capf ()
-  "Function used for `completion-at-point-functions'."
-  (when-let* ((activated (looking-back (org-block-capf--regexp)
-                                       (line-beginning-position)))
-              (range (or (bounds-of-thing-at-point 'symbol)
-                         (cons (point) (point))))
-              (end (cdr range))
-              (start (car range)))
-    (list
-     start
-     end
-     (completion-table-dynamic
-      (lambda (_)
-        (org-block-capf--all-candidates)))
-     :exclusive 'no
-     :annotation-function
-     (lambda (_) " <org-block>")
-     :company-doc-buffer
-     #'org-block-capf--doc-buffer
-     :exit-function
-     (lambda (insertion _status)
-       (when (seq-contains-p (org-block-capf--all-candidates) insertion)
-         (org-block-capf--expand insertion t))))))
+(defun org-block-capf (&optional interactive)
+  "Complete `<' prefix to an org block.
+If INTERACTIVE is nil the function acts like a Capf that can be
+be added to `completion-at-point-functions'"
+  (interactive (list t))
+  (if interactive
+      (let ((completion-at-point-functions (list #'org-block-capf)))
+        (or (completion-at-point) (user-error "%s: No completions" #'org-block-capf)))
+    (when-let* ((activated (looking-back (org-block-capf--regexp)
+                                         (line-beginning-position)))
+                (range (or (bounds-of-thing-at-point 'symbol)
+                           (cons (point) (point))))
+                (end (cdr range))
+                (start (car range)))
+      (list
+       start
+       end
+       (completion-table-dynamic
+        (lambda (_)
+          (org-block-capf--all-candidates)))
+       :exclusive 'no
+       :annotation-function
+       (lambda (_) " <org-block>")
+       :company-doc-buffer
+       #'org-block-capf--doc-buffer
+       :exit-function
+       (lambda (insertion _status)
+         (when (seq-contains-p (org-block-capf--all-candidates) insertion)
+           (org-block-capf--expand insertion t)))))))
 
 ;;;###autoload
 (defun org-block-capf-add-to-completion-at-point-functions ()
