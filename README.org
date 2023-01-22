@@ -6,7 +6,7 @@ tl;dr “<” to trigger org block completion at point.
 [[file:corfu.png]]\\
 Screenshot of =org-block-capf= completion in =corfu= with =corfu-popupinfo-mode= enabled for block preview.
 
-Like [[https://github.com/xenodium/company-org-block][company-org-block]], but for users of the built-in =completion-at-point= completion or its extensions like [[https://github.com/minad/corfu][corfu]], who want similar functionality without the [[https://company-mode.github.io/][company]] dependency. It's remains compatible with company via its =company-capf= backend.
+Like [[https://github.com/xenodium/company-org-block][company-org-block]], but for users of the built-in =completion-at-point= completion or its extensions like [[https://github.com/minad/corfu][corfu]], who want similar functionality without the [[https://company-mode.github.io/][company]] dependency. org-block-capf is still compatible with company via its =company-capf= backend.
 
 Check out [[https://github.com/xenodium/company-org-block][company-org-block]] to get a feel for the functionality and capabilities.
 
