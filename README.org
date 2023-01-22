@@ -8,11 +8,12 @@ Like [[https://github.com/xenodium/company-org-block][company-org-block]], but f
 
 Check out [[https://github.com/xenodium/company-org-block][company-org-block]] to get a feel for the functionality and capabilities.
 
-You can enable =org-block-capf= by adding it to =completion-at-point-functions= or you can invoke =org-block-capf-add-to-completion-at-point-functions=
-as follows:
-
+To enable =org-block-capf=, add it to the =completion-at-point-functions= in org-mode, which you can do via:
 #+begin_src emacs-lisp :lexical no
   (require 'org-block-capf)
 
   (org-block-capf-add-to-completion-at-point-functions)
 #+end_src
+Then, completing the “<” via =complete-symbol= / =completion-at-point= in org-mode should let you select an org block.
+
+Alternatively, you can use =M-x org-block-capf= as an interactive command to complete “<”, which doesn't require the above setup, as it uses itself as a completion-at-point-function.
