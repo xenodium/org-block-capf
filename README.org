@@ -20,3 +20,5 @@ To enable =org-block-capf=, add it to the =completion-at-point-functions= in org
 Then, completing the “<” via =complete-symbol= / =completion-at-point= in org-mode should let you select an org block.
 
 Alternatively, you can use =M-x org-block-capf= as an interactive command to complete “<”, which doesn't require the above setup, as it uses itself as a completion-at-point-function.
+
+Many thanks to [[https://github.com/meliache][Michael Eliachevitch]] for contributing improvements.
